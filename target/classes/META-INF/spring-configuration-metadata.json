@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "authcode",
+      "type": "com.breakout.meng.service.impl.MeberServiceImpl",
+      "sourceType": "com.breakout.meng.service.impl.MeberServiceImpl"
+    }
+  ],
+  "properties": [
+    {
+      "name": "authcode.expire",
+      "type": "java.lang.Long",
+      "sourceType": "com.breakout.meng.service.impl.MeberServiceImpl"
+    },
+    {
+      "name": "authcode.prifix",
+      "type": "java.lang.String",
+      "sourceType": "com.breakout.meng.service.impl.MeberServiceImpl"
+    }
+  ],
+  "hints": []
+}
