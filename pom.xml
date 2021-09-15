@@ -114,7 +114,12 @@
             <artifactId>jjwt</artifactId>
             <version>0.9.0</version>
         </dependency>
-
+        <!--集成logstash-->
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>5.3</version>
+        </dependency>
 
     </dependencies>
 
@@ -124,43 +129,72 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <imageName>luomeng/${project.artifactId}:${project.version}</imageName>
+                    <dockerHost>http://192.168.213.129:2375</dockerHost>
+                    <baseImage>java:8</baseImage>
+                    <entryPoint>["java", "-jar","/${project.build.finalName}.jar"]
+                    </entryPoint>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </pluginRepository>
-    </pluginRepositories>
+
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>spring-milestones</id>-->
+<!--            <name>Spring Milestones</name>-->
+<!--            <url>https://repo.spring.io/milestone</url>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
+<!--        <repository>-->
+<!--            <id>spring-snapshots</id>-->
+<!--            <name>Spring Snapshots</name>-->
+<!--            <url>https://repo.spring.io/snapshot</url>-->
+<!--            <releases>-->
+<!--                <enabled>false</enabled>-->
+<!--            </releases>-->
+<!--        </repository>-->
+<!--    </repositories>-->
+<!--    <pluginRepositories>-->
+<!--        <pluginRepository>-->
+<!--            <id>spring-milestones</id>-->
+<!--            <name>Spring Milestones</name>-->
+<!--            <url>https://repo.spring.io/milestone</url>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--        </pluginRepository>-->
+<!--        <pluginRepository>-->
+<!--            <id>spring-snapshots</id>-->
+<!--            <name>Spring Snapshots</name>-->
+<!--            <url>https://repo.spring.io/snapshot</url>-->
+<!--            <releases>-->
+<!--                <enabled>false</enabled>-->
+<!--            </releases>-->
+<!--        </pluginRepository>-->
+<!--    </pluginRepositories>-->
 
 </project>
