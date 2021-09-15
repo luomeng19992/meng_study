@@ -1,46 +1,38 @@
-server:
-  port: 8080
-
 spring:
   datasource:
     url: jdbc:mysql://db:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: root
   redis:
-    host: rd # Redis·şÎñÆ÷µØÖ·
-    database: 0 # RedisÊı¾İ¿âË÷Òı£¨Ä¬ÈÏÎª0£©
-    port: 6379 # Redis·şÎñÆ÷Á¬½Ó¶Ë¿Ú
-    password: # Redis·şÎñÆ÷Á¬½ÓÃÜÂë£¨Ä¬ÈÏÎª¿Õ£©
+    host: rd # RedisæœåŠ¡å™¨åœ°å€
+    database: 0 # Redisæ•°æ®åº“ç´¢å¼•ï¼ˆé»˜è®¤ä¸º0ï¼‰
+    port: 6379 # RedisæœåŠ¡å™¨è¿æ¥ç«¯å£
+    password: # RedisæœåŠ¡å™¨è¿æ¥å¯†ç ï¼ˆé»˜è®¤ä¸ºç©ºï¼‰
     jedis:
       pool:
-        max-active: 8 # Á¬½Ó³Ø×î´óÁ¬½ÓÊı£¨Ê¹ÓÃ¸ºÖµ±íÊ¾Ã»ÓĞÏŞÖÆ£©
-        max-wait: -1ms # Á¬½Ó³Ø×î´ó×èÈûµÈ´ıÊ±¼ä£¨Ê¹ÓÃ¸ºÖµ±íÊ¾Ã»ÓĞÏŞÖÆ£©
-        max-idle: 8 # Á¬½Ó³ØÖĞµÄ×î´ó¿ÕÏĞÁ¬½Ó
-        min-idle: 0 # Á¬½Ó³ØÖĞµÄ×îĞ¡¿ÕÏĞÁ¬½Ó
-    timeout: 3000ms # Á¬½Ó³¬Ê±Ê±¼ä£¨ºÁÃë£©
-  data:
-    elasticsearch:
-      repositories:
-        enabled: true
-      cluster-nodes: es:9300 # esµÄÁ¬½ÓµØÖ·¼°¶Ë¿ÚºÅ
-      cluster-name: elasticsearch # es¼¯ÈºµÄÃû³Æ
-
-
+        max-active: 8 # è¿æ¥æ± æœ€å¤§è¿æ¥æ•°ï¼ˆä½¿ç”¨è´Ÿå€¼è¡¨ç¤ºæ²¡æœ‰é™åˆ¶ï¼‰
+        max-wait: -1ms # è¿æ¥æ± æœ€å¤§é˜»å¡ç­‰å¾…æ—¶é—´ï¼ˆä½¿ç”¨è´Ÿå€¼è¡¨ç¤ºæ²¡æœ‰é™åˆ¶ï¼‰
+        max-idle: 8 # è¿æ¥æ± ä¸­çš„æœ€å¤§ç©ºé—²è¿æ¥
+        min-idle: 0 # è¿æ¥æ± ä¸­çš„æœ€å°ç©ºé—²è¿æ¥
+    timeout: 3000ms # è¿æ¥è¶…æ—¶æ—¶é—´ï¼ˆæ¯«ç§’ï¼‰
+  elasticsearch:
+      rest:
+        uris: es:9200
 mybatis:
   mapper-locations:
     - classpath:mapper/*.xml
     - classpath*:com/**/mapper/*.xml
 
 
-# ×Ô¶¨Òåredis key
+# è‡ªå®šä¹‰redis key
 authcode:
   prifix: "meng:authCode:"
   expire: 120
 
-# ×Ô¶¨Òåjwt key
+# è‡ªå®šä¹‰jwt key
 jwt:
-  tokenHeader: Authorization #JWT´æ´¢µÄÇëÇóÍ·
-  secret: mySecret #JWT¼Ó½âÃÜÊ¹ÓÃµÄÃÜÔ¿
-  expiration: 604800 #JWTµÄ³¬ÆÚÏŞÊ±¼ä(60*60*24)
-  tokenHead: Bearer  #JWT¸ºÔØÖĞÄÃµ½¿ªÍ·
+  tokenHeader: Authorization #JWTå­˜å‚¨çš„è¯·æ±‚å¤´
+  secret: mySecret #JWTåŠ è§£å¯†ä½¿ç”¨çš„å¯†é’¥
+  expiration: 604800 #JWTçš„è¶…æœŸé™æ—¶é—´(60*60*24)
+  tokenHead: Bearer  #JWTè´Ÿè½½ä¸­æ‹¿åˆ°å¼€å¤´
 
